@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit";
+// import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiUrls } from "../constants";
 
@@ -8,7 +8,22 @@ const fetchPokemons = createAsyncThunk(
     const res = await axios.get(apiUrls.getPokemons);
     return res.data;
   }
-)
+);
+
+const fetchPokemonImage = createAsyncThunk(
+  'pokemons/getImage', async ({url} : {url: string}) => {
+    const res = await axios.get(url);
+    return res.data; 
+  } 
+);
+
+const fetchPokemonDetail = createAsyncThunk(
+  'pokemons/getDetail', async ({url} : {url: string}) => {
+    const res = await axios.get(url);
+    return res.data; 
+  } 
+);
+
 
 interface PokemonsState {
   currentPokemons: any, 
@@ -47,8 +62,22 @@ const pokemonsSlice = createSlice({
       }
       state.prevPage = action.payload.previous;
     })
+    .addCase(fetchPokemonImage.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(fetchPokemonImage.fulfilled, (state, action) => {
+      state.loading = false; 
+      state.imageUrl = action.payload.sprites.front_default;
+    })
+    .addCase(fetchPokemonDetail.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(fetchPokemonDetail.fulfilled, (state, action) => {
+      state.loading = false; 
+      state.detailedPokemon = action.payload;
+    })
   }
 });
 
 export default pokemonsSlice.reducer;
-export {fetchPokemons};
+export {fetchPokemons, fetchPokemonImage, fetchPokemonDetail};
