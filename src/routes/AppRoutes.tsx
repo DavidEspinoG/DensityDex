@@ -1,16 +1,11 @@
 import { useRoutes } from "react-router-dom";
 import Home from "../pages/Home";
-import UserData from "../pages/UserData";
-const AppRoutes = () => {
+import { ReactElement } from "react";
+
+const AppRoutes = () : ReactElement | null => {
   const routes = useRoutes([
     {path: '/', element: <Home />}, 
-    {path: '/user-data/:userId', element: <UserData />,
-      children: [
-        {path: 'child', element: <p>children</p>}
-      ]
-    }, 
-    {path: '/*', element: <p>Not found</p>}, 
-
+    {path: '/pokemonDetailed', element: <Home />}, 
   ])
   return routes;
 };
