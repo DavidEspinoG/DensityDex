@@ -1,7 +1,7 @@
 import { useParams, useSearchParams } from "react-router-dom";
-
 const UserData = () => {
-  const [searchParams, _] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  setSearchParams({data : 'Jorge', age: "32"})
   let data = searchParams.get('data');
   let age = searchParams.get('age');
   const { userId } = useParams();
