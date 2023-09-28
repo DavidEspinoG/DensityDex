@@ -4,6 +4,25 @@
   --orange: rgba(255, 119, 1, 0.895);
 }
 
+
+@keyframes pokerotate {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(25deg);
+  }
+  50% {
+    transform: rotate(0) ;
+  }
+  75% {
+    transform: rotate(-25deg)
+  }
+  100% {
+    transform: rotate(0)
+  }
+}
+
 h1 {
   font-family: var(--titlefont);
   text-align: center;
@@ -22,6 +41,9 @@ p, span {
 
 .pokemon-image {
   width: 180px;
+  animation-name: pokerotate;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
 }
 
 .image-container {
@@ -69,5 +91,4 @@ p, span {
   font-size: 30px;
   text-transform: capitalize;
 }
-
 
