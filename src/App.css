@@ -1,0 +1,88 @@
+:root {
+  --pixelfont: 'Pixelify Sans', cursive;
+  --titlefont: 'Dela Gothic One', cursive;
+  --orange: rgba(255, 119, 1, 0.895);
+}
+
+h1 {
+  font-family: var(--titlefont);
+  text-align: center;
+}
+
+p {
+  font-family: var(--pixelfont);
+}
+
+.main-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media(min-width: 768px){
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media(min-width: 992px){
+  .cards-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pokemon-card {
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(191, 186, 186);
+  border-radius: 10px;
+  background-color: white;
+}
+
+.pokemon-card:hover {
+  cursor: pointer;
+  border: 2px solid rgba(255, 119, 1, 0.895);
+}
+
+.pokemon-image {
+  width: 180px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+
+}
+
+.button {
+  background-color: var(--orange) ;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.buttons-container{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+.button:disabled {
+  background-color: rgb(174, 181, 187);
+  cursor:not-allowed;
+  transform: scale(1);
+}

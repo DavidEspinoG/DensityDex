@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { apiUrls } from "../constants";
+// import { apiUrls } from "../constants";
 
 const fetchPokemons = createAsyncThunk(
-  'pokemons/fetchPokemons', async() => {
-    const res = await axios.get(apiUrls.getPokemons);
+  'pokemons/fetchPokemons', async({url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'} : {url? : string}) => {
+    const res = await axios.get(url);
     return res.data;
   }
 );
@@ -54,10 +54,11 @@ const pokemonsSlice = createSlice({
     })
     .addCase(fetchPokemons.fulfilled, (state, action) => {
       state.loading = false; 
-      state.currentPokemons = action.payload.results;
-      if(action.payload.results[0].name !== 'example'){
+      if(action.payload.results[0].name !== 'kabutops'){
+        state.currentPokemons = action.payload.results;
         state.nextPage = action.payload.next;
       } else {
+        state.currentPokemons = action.payload.results.slice(0, 11);
         state.nextPage = null;
       }
       state.prevPage = action.payload.previous;
