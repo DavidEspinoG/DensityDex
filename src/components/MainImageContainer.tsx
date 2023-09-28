@@ -6,7 +6,7 @@ const MainImageContainer = () : ReactElement => {
   const imageUrl = useAppSelector((state) => state.imageUrl);
   return (
     <div className="image-container">
-      {imageUrl && <img src={imageUrl} className="pokemon-image"/>}
+      {imageUrl && <img src={imageUrl} className="pokemon-image" alt={selectedPokemon}/>}
       <span className="current-pokemon-name">{selectedPokemon}</span>
     </div>
   )
