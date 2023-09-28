@@ -4,7 +4,6 @@ import axios from "axios";
 // import { apiUrls } from "../constants";
 import { DetailedPokemon, PokemonsState } from "../types/PokemonTypes";
 
-
 const fetchPokemons = createAsyncThunk(
   'pokemons/fetchPokemons', async({url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'} : {url? : string}) => {
     const res = await axios.get(url);
@@ -15,6 +14,7 @@ const fetchPokemons = createAsyncThunk(
 const fetchPokemonImage = createAsyncThunk(
   'pokemons/getImage', async ({url} : {url: string}) => {
     const res = await axios.get(url);
+    localStorage.setItem('image-url', res.data.sprites.front_default);
     return res.data; 
   } 
 );
@@ -22,6 +22,7 @@ const fetchPokemonImage = createAsyncThunk(
 const fetchPokemonDetail = createAsyncThunk(
   'pokemons/getDetail', async ({url} : {url: string}) => {
     const res = await axios.get(url);
+    localStorage.setItem('detailed-pokemon', JSON.stringify(res.data))
     return res.data as DetailedPokemon; 
   } 
 );
@@ -59,7 +60,23 @@ const pokemonsSlice = createSlice({
   initialState, 
   reducers: {
     addSelectedPokemon(state, action : PayloadAction<string>){
+      localStorage.setItem('selected-pokemon', action.payload)
       state.selectedPokemon = action.payload;
+    }, 
+    getPokemonFromLocalStorage(state) {
+      const localPokemon = localStorage.getItem('detailed-pokemon');
+      if(localPokemon){
+        let pokemon = JSON.parse(localPokemon);
+        state.detailedPokemon = pokemon;
+      }
+      const localImage = localStorage.getItem('image-url');
+      if(localImage){
+        state.imageUrl = localImage;
+      }
+      const localPokemonName = localStorage.getItem('selected-pokemon');
+      if(localPokemonName){
+        state.selectedPokemon = localPokemonName;
+      }
     }
   }, 
   extraReducers: (builder) => {
@@ -97,4 +114,9 @@ const pokemonsSlice = createSlice({
 
 export default pokemonsSlice.reducer;
 export {fetchPokemons, fetchPokemonImage, fetchPokemonDetail};
-export const { addSelectedPokemon } = pokemonsSlice.actions;
+export const { 
+  addSelectedPokemon, 
+  getPokemonFromLocalStorage,
+  // getPokemonImageFromLocalStorage, 
+  // getPokemonNameFromLocalStorage,
+} = pokemonsSlice.actions;

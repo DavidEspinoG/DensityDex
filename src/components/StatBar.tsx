@@ -3,10 +3,11 @@ import '../styles/StatBar.css';
 
 const StatBar = ({name, amount} : {name: string, amount: number}) : ReactElement => {
   const styles = {
-    backgroundColor: "red",
+    backgroundColor: "orange",
     height: "20px",
     borderRadius: "10px",
-    width: `${amount * 1.7}px`
+    width: `${amount}%`,
+    maxWidth: '100%'
   }
   return (
     <div className="stat">
