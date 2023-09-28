@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { apiUrls } from "../constants";
 import { DetailedPokemon, PokemonsState } from "../types/PokemonTypes";
 
 const fetchPokemons = createAsyncThunk(

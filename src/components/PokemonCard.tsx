@@ -4,6 +4,7 @@ import { fetchPokemonImage, addSelectedPokemon } from "../state/pokemonSlice";
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchPokemonDetail } from "../state/pokemonSlice";
+import '../styles/PokemonCard.css';
 
 const PokemonCard = ({name, url} : {name: string, url: string}) : ReactElement => {
   const dispatch = useAppDispatch();

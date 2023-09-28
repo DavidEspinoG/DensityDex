@@ -2,6 +2,8 @@ import { ReactElement } from "react";
 import { useAppSelector } from "../state/hooks";
 import { Pokemon } from "../types/PokemonTypes";
 import PokemonCard from "./PokemonCard";
+import '../styles/CardsContainer.css';
+
 const CardsContainer = () : ReactElement => {
   const pokemons = useAppSelector((state) => state.currentPokemons);
   return (
