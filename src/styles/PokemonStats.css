@@ -1,0 +1,10 @@
+.stats-container {
+  max-width: 300px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.stats-container p {
+  font-family: var(--titlefont);
+}
+

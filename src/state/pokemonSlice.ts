@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 // import { apiUrls } from "../constants";
+import { DetailedPokemon, PokemonsState } from "../types/PokemonTypes";
+
 
 const fetchPokemons = createAsyncThunk(
   'pokemons/fetchPokemons', async({url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'} : {url? : string}) => {
@@ -20,24 +22,31 @@ const fetchPokemonImage = createAsyncThunk(
 const fetchPokemonDetail = createAsyncThunk(
   'pokemons/getDetail', async ({url} : {url: string}) => {
     const res = await axios.get(url);
-    return res.data; 
+    return res.data as DetailedPokemon; 
   } 
 );
 
 
-interface PokemonsState {
-  currentPokemons: any, 
-  loading: boolean,
-  imageUrl: string | null, 
-  detailedPokemon: object,
-  prevPage: string | null,
-  nextPage: string | null,
-  selectedPokemon: string,  
-}
-
 const initialState: PokemonsState = {
   currentPokemons: [],
-  detailedPokemon: {},
+  detailedPokemon: {
+    abilities: [],
+    base_experience: 0,
+    forms: [],
+    game_indices: [],
+    height: 0, 
+    held_items: [],
+    id: 0, 
+    is_default: false, 
+    location_area_encounters: '', 
+    moves: [],
+    name: '', 
+    order: 0, 
+    past_types: [],
+    species: {},
+    sprites: {},
+    stats: [],
+  },
   loading: false, 
   imageUrl: null, 
   prevPage: '', 
