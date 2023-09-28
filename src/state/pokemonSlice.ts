@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 // import { apiUrls } from "../constants";
 
@@ -31,7 +31,8 @@ interface PokemonsState {
   imageUrl: string | null, 
   detailedPokemon: object,
   prevPage: string | null,
-  nextPage: string | null, 
+  nextPage: string | null,
+  selectedPokemon: string,  
 }
 
 const initialState: PokemonsState = {
@@ -41,12 +42,17 @@ const initialState: PokemonsState = {
   imageUrl: null, 
   prevPage: '', 
   nextPage: '',
+  selectedPokemon: '',
 };
 
 const pokemonsSlice = createSlice({
   name: 'pokemons', 
   initialState, 
-  reducers: {}, 
+  reducers: {
+    addSelectedPokemon(state, action : PayloadAction<string>){
+      state.selectedPokemon = action.payload;
+    }
+  }, 
   extraReducers: (builder) => {
     builder
     .addCase(fetchPokemons.pending, (state) => {
@@ -82,3 +88,4 @@ const pokemonsSlice = createSlice({
 
 export default pokemonsSlice.reducer;
 export {fetchPokemons, fetchPokemonImage, fetchPokemonDetail};
+export const { addSelectedPokemon } = pokemonsSlice.actions;

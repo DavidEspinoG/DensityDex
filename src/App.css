@@ -9,8 +9,9 @@ h1 {
   text-align: center;
 }
 
-p {
+p, span {
   font-family: var(--pixelfont);
+
 }
 
 .main-container {
@@ -56,8 +57,10 @@ p {
 
 .image-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-
+  align-items: center;
+  
 }
 
 .button {
@@ -85,4 +88,19 @@ p {
   background-color: rgb(174, 181, 187);
   cursor:not-allowed;
   transform: scale(1);
+}
+
+.selected {
+  background-color: rgb(251, 251, 15);
+}
+
+.current-pokemon-name {
+  position: relative;
+  top: -25px;
+  font-size: 30px;
+  text-transform: capitalize;
+}
+
+.pokemon-card-name {
+  text-transform: capitalize;
 }
