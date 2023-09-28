@@ -48,7 +48,7 @@ p, span {
 
 .pokemon-card:hover {
   cursor: pointer;
-  border: 2px solid rgba(255, 119, 1, 0.895);
+  border: 1px solid rgba(255, 119, 1, 0.895);
 }
 
 .pokemon-image {
